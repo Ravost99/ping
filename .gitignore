@@ -1,7 +1,10 @@
 # Personal Pinger files
 round
+pyproject.toml
+poetry.lock
 
 # Byte-compiled / optimized / DLL files
+__pycache__/
 __pycache__/
 *.py[cod]
 *$py.class
