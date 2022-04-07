@@ -6,3 +6,5 @@ And all you have to do it ping it through [uptimerobot](https://uptimerobot.com)
 - Ping rounds
 - Custom site list
 - Now working with [glitch](https://glitch.com/)
+- Down Log
+- 
