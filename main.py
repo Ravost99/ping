@@ -76,7 +76,13 @@ def ping(round:int):
       if i not in lst:
         try:
           if i != '':
-            req = requests.get(i)
+            if "glitch.me" in i:
+              headers = {
+                'User-Agent': 'Mozilla/5.0 (X11; CrOS x86_64 14324.80.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.102 Safari/537.36',
+              }
+              req = requests.get(i, headers=headers)
+            else:
+              req = requests.get(i)
             if req.status_code == 200 or req.status_code == 302 or req.status_code == 304:
               color = colors.green
             elif req.status_code == 400 or req.status_code == 401 or req.status_code == 404:

@@ -2,6 +2,7 @@
 round
 pyproject.toml
 poetry.lock
+sites.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
