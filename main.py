@@ -27,6 +27,15 @@ def home():
     return render_template('index.html')
   #return "<h1>Hello world!<br>Ping!</h1><br><p>Add site <a href='https://ping.ravost.repl.co/add/'>Here</a>"
 
+@app.route('/get/<url>', methods=['POST', 'GET'])
+def get(url):
+  #if request.method == "POST":
+    #url = request.form['url']
+    if 'http' in url:
+      return fetch(url)
+    else:
+      return fetch('https://'+url)
+
 @app.route('/round')
 def getRound():
   return readFile('round')
@@ -38,6 +47,16 @@ def getLogs():
 @app.route('/up')
 def up():
   return 'up', 200
+
+def fetch(url):
+  headers = {
+    'User-Agent': 'Mozilla/5.0 (X11; CrOS x86_64 14324.80.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.102 Safari/537.36',
+  }
+  if url in readFile('sites.txt'):
+    req = requests.get(url, headers=headers)
+    return str(req.status_code)
+  else:
+    return 'url is not in sites.txt'
 
 def new(url):
   with open('sites.txt') as sites:
