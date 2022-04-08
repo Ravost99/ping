@@ -7,4 +7,6 @@ And all you have to do it ping it through [uptimerobot](https://uptimerobot.com)
 - Custom site list
 - Now working with [glitch](https://glitch.com/)
 - Down Log
-- 
+
+## Setup
+run `bash setup.sh`
