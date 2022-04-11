@@ -1,3 +1,5 @@
+# my color 'library/package'
+# simple, uses escape codes
 import random, sys
 
 #main colors

@@ -1,4 +1,5 @@
 # like my horibl bash?
+# touched on bash just a little
 echo "creating log.txt and sites.txt"
 touch log.txt
 touch sites.txt
