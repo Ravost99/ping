@@ -1,6 +1,7 @@
 import requests, time, colors, os, time, pytz
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
+from auto_update import update
 from colors import colorMsg, rainBow, allBGCodes, allColorCodes
 from threading import Thread
 
