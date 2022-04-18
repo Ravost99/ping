@@ -145,7 +145,7 @@ def run():
 
 # start pinging
 def start():
-  #update()
+  update()
   # to continue with rounds in 'round'
   with open('round') as f:
     round = int(f.read())
