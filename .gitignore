@@ -3,6 +3,7 @@ pyproject.toml
 poetry.lock
 sites.txt
 log.txt
+config.py
 
 .env
 __pycache__/
