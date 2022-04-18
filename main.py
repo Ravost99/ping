@@ -1,5 +1,5 @@
 try:
-  import requests, time, colors, os, time, pytz, config
+  import requests, pytz
 except:
   import os
   os.system('pip install requests pytz')
