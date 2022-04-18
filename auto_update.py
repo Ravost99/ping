@@ -4,7 +4,7 @@ import urllib, colors, os
 # pretty much like auto `git pull`
 def update(send_return=True):
   # files to be updated
-  stuff_to_update = ['main.py', 'setup.py', 'auto_update.py', 'colors.py', 'templates/index.html', 'README.md']
+  stuff_to_update = ['main.py', 'auto_update.py', 'colors.py', 'templates/index.html', 'README.md']
   for item in stuff_to_update:
     new_data = ""
     update_data = ""
