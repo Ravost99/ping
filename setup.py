@@ -36,6 +36,6 @@ print("Setup Completed!")
 print("Restarting with main.py")
 time.sleep(2)
 with open('config.py', 'a') as f:
-  f.write(f'setup = True\nlogging = {logging}\nping_rounds = {rounds}\nroundly_updates = {updates}\nping_intvl = {interval}\nwebsite = {website}\n')
+  f.write(f'setup = True\nlogging = {logging}\nping_rounds = {rounds}\nroundly_updates = {updates}\nping_intvl = {interval}\nwebsite = \'{website}\'\n')
 os.remove(__file__)
 os.system('python3 main.py')
