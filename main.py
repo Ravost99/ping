@@ -1,4 +1,4 @@
-import requests, time, colors, os, time, pytz
+import requests, time, colors, os, time, pytz, config
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
 from auto_update import update
@@ -111,7 +111,7 @@ def ping(round:int):
             # status codes with colors!
             if req.status_code == 200 or req.status_code == 302 or req.status_code == 304:
               color = colors.green
-            elif req.status_code == 400 or req.status_code == 401 or req.status_code == 404:
+            elif req.status_code == 400 or req.status_code == 401 or req.status_code == 404 or req.status_code == 502:
               # error logging
               with open('log.txt', 'a') as f:
                 f.write(f'Errors in Ping round #{str(round)}\nError on Url {i}: \'{req.status_code}\' - {current_time} {current_date}\n')
@@ -139,6 +139,7 @@ def run():
 
 # start pinging
 def start():
+  #update()
   # to continue with rounds in 'round'
   with open('round') as f:
     round = int(f.read())
