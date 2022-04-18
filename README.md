@@ -2,6 +2,7 @@
 
 And all you have to do it ping it through [uptimerobot](https://uptimerobot.com)
 <!-- want to remove pinging through uptimerobot -->
+Version/Release on github coming soon!
 
 ## Features
 - Ping rounds
@@ -14,6 +15,6 @@ run `python3 setup.py`<br>
 or `python setup.py`<br>
 
 ## Coming Soon
-- [ ] Self ping
+- [X] Self ping (kinda)
 - [ ] Quick fetch
-- [ ] Config file, _maybe_
+- [X] Config file, _maybe_
