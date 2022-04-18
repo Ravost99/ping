@@ -10,7 +10,8 @@ And all you have to do it ping it through [uptimerobot](https://uptimerobot.com)
 - Down Log
 
 ## Setup
-run `bash setup.sh`<br>
+run `python3 setup.py`<br>
+or `python setup.py`<br>
 
 ## Coming Soon
 - [ ] Self ping
