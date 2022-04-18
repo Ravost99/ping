@@ -12,4 +12,3 @@ def update():
     else:
       print(f"{colors.dark_red}Cancled Update in {item}")
   print("Restarting...")
-  os.system('python3 main.py')
