@@ -149,8 +149,11 @@ def run():
 def start():
   update()
   # to continue with rounds in 'round'
+  if os.path.isfile('round') == False:
+    with open('round', 'w+') as f:
+      f.write('0')
   with open('round') as f:
-    round = int(f.read())
+    round = int(f.read())    
   colorMsg("Starting... ", colors.green)
   time.sleep(0.5)
   clear()
