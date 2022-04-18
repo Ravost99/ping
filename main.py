@@ -90,6 +90,8 @@ def readFile(file:str, type:str='r'):
 def ping(round:int):
   with open('round', 'w') as f:
     f.write(str(round))
+  if config.roundly_updates == True:
+    update(False)
   clear()
   # time and date for log
   now = datetime.now(pytz.timezone('America/Chicago'))

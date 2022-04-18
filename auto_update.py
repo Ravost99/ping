@@ -2,7 +2,7 @@ import urllib, colors, os
 
 # this took about >1 hour of coding 
 # pretty much like auto `git pull`
-def update():
+def update(send_return=True):
   # files to be updated
   stuff_to_update = ['main.py', 'setup.py', 'auto_update.py', 'colors.py', 'templates/index.html', 'README.md']
   for item in stuff_to_update:
@@ -18,7 +18,10 @@ def update():
         update_data += line
       # you get the point
       if new_data == update_data:
-        print(f"{colors.green}No update in {item}!{colors.reset}")
+        if send_return == True:
+          print(f"{colors.green}No update in {item}!{colors.reset}")
+        else:
+          return
       else:
         update = input(f"There is a new update in {item}, would you like to update? (Will override {colors.underline}everything{colors.reset} in {item}) (Y/N) ")
         if update.lower() == 'y':
