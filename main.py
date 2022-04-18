@@ -161,17 +161,8 @@ def start():
     # add 1 to round
     round += 1
 
-def self_ping():
-  while True:
-    # getting the website / ip the server is running on
-    requests.get(config.website)
-    # waiting for the ping interval in config.py
-    time.sleep(config.ping_intvl*60)
-
 # threading to start the web server And start pinging sites
 server = Thread(target=run)
 server.start()
 start = Thread(target=start)
 start.start()
-self = Thread(target=self_ping)
-self.start()
