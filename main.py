@@ -49,7 +49,10 @@ def getRound():
 # getting logs
 @app.route('/logs')
 def getLogs():
-  return readFile('log.txt')
+  if config.logging == True:
+    return readFile('log.txt')
+  else:
+    return 'logging is off!'
 
 # checking if site is up, for my iphone shortcut
 @app.route('/up')
@@ -86,10 +89,19 @@ def readFile(file:str, type:str='r'):
       lines += line + '\n'
   return lines
 
+# ez
+def log(req, url, time, date):
+  with open('log.txt', 'a') as f:
+    if config.ping_rounds == True:
+      f.write(f'Errors in Ping round #{str(round)}\nError on Url {url}: \'{req.status_code}\' - {time} {date}\n')
+    else:
+      f.write(f'Error on Url {url}: \'{req.status_code}\' - {time} {date}\n')
+  
 #tldr ping function
 def ping(round:int):
-  with open('round', 'w') as f:
-    f.write(str(round))
+  if config.ping_rounds == True:
+    with open('round', 'w') as f:
+      f.write(str(round))
   if config.roundly_updates == True:
     update(False)
   clear()
@@ -102,7 +114,8 @@ def ping(round:int):
   # getting all sites in 'sites.txt'
   with open("sites.txt") as f:
     pings = f.read().split('\n')
-    print(f"Ping round #{str(round)}")
+    if config.ping_rounds == True:
+      print(f"Ping round #{str(round)}")
     for i in pings:
       if i not in ping_list:
         try:
@@ -121,15 +134,15 @@ def ping(round:int):
               color = colors.green
             elif req.status_code == 400 or req.status_code == 401 or req.status_code == 404 or req.status_code == 502:
               # error logging
-              with open('log.txt', 'a') as f:
-                f.write(f'Errors in Ping round #{str(round)}\nError on Url {i}: \'{req.status_code}\' - {current_time} {current_date}\n')
+              if config.logging == True:
+                log(req, i, current_time, current_date)
               color = colors.dark_red
             elif req.status_code == 307 or req.status_code == 308:
               color = colors.yellow
             elif req.status_code == 500:
               # error logging again
-              with open('log.txt', 'a') as f:
-                f.write(f'Errors in Ping round #{str(round)}\nError on Url {i}: \'{req.status_code}\' - {current_time} {current_date}\n')
+              if config.logging == True:
+                log(req, i, current_time, current_date)
               color = colors.purple
             else:
               color = colors.reset
@@ -139,7 +152,6 @@ def ping(round:int):
         ping_list.append(i)
     # next round!
     round += 1
-    #print(pings)
 
 #running ws for thread
 def run():
@@ -148,12 +160,15 @@ def run():
 # start pinging
 def start():
   update()
-  # to continue with rounds in 'round'
-  if os.path.isfile('round') == False:
-    with open('round', 'w+') as f:
-      f.write('0')
-  with open('round') as f:
-    round = int(f.read())    
+  if config.ping_rounds == True:
+    # to continue with rounds in 'round'
+    if os.path.isfile('round') == False:
+      with open('round', 'w+') as f:
+        f.write('0')
+    with open('round') as f:
+      round = int(f.read())
+  else:
+    round = 0
   colorMsg("Starting... ", colors.green)
   time.sleep(0.5)
   clear()
