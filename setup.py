@@ -26,7 +26,7 @@ def check(file):
   if os.path.isfile(file) == True:
     return
   else:
-    with open('file', 'w+') as f:
+    with open(file, 'w+') as f:
       f.write('')
 
 check('log.txt')
