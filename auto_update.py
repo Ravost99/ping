@@ -8,7 +8,7 @@ def update():
     if update.lower() == 'y':
       with open(item, 'wb') as file:
         file.write(dat)
-      print(f'{colors.green}Updated Successfull!')
+      print(f'{colors.green}Updated Successfull!{colors.reset}')
     else:
-      print(f"{colors.dark_red}Cancled Update in {item}")
+      print(f"{colors.dark_red}Cancled Update in {item}{colors.reset}")
   print("Restarting...")
