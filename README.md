@@ -1,6 +1,6 @@
 # Simple Pinger
 
-And all you have to do it ping it through [uptimerobot](https://uptimerobot.com)
+And all you have to do it ping it through [uptimerobot](https://uptimerobot.com), well soon you won't have to!
 <!-- want to remove pinging through uptimerobot -->
 Version/Release on github coming soon!
 
