@@ -1,11 +1,10 @@
 try:
-  import requests, pytz
+  import requests, time, colors, os, time, pytz, config
 except:
   import os
   os.system('pip install requests pytz')
   os.system('pip install -U pip')
 
-import time, colors, os, time, config
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
 from auto_update import update
