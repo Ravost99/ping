@@ -104,12 +104,6 @@ def log(req, url, time, date):
     else:
       f.write(f'Error on Url {url}: \'{req.status_code}\' - {time} {date}\n')
 
-# getting whitelist
-def get_whitelist():
-  with open('whitelist.txt') as wl:
-    return wl.read().split('\n')
-
-quit(get_whitelist())
 #tldr ping function
 def ping(round:int):
   if config.ping_rounds == True:
