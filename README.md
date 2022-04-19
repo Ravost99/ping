@@ -2,7 +2,8 @@
 
 And all you have to do it ping it through [uptimerobot](https://uptimerobot.com), well soon you won't have to!
 <!-- want to remove pinging through uptimerobot -->
-Version/Release on github coming soon!
+Version/Release on github coming soon!<br>
+Share with friends, Star and Watch for updates coming soon!
 
 ## Features
 - Ping rounds
