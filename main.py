@@ -103,7 +103,13 @@ def log(req, url, time, date):
       f.write(f'Errors in Ping round #{str(round)}\nError on Url {url}: \'{req.status_code}\' - {time} {date}\n')
     else:
       f.write(f'Error on Url {url}: \'{req.status_code}\' - {time} {date}\n')
-  
+
+# getting whitelist
+def get_whitelist():
+  with open('whitelist.txt') as wl:
+    return wl.read().split('\n')
+
+quit(get_whitelist())
 #tldr ping function
 def ping(round:int):
   if config.ping_rounds == True:
@@ -128,14 +134,14 @@ def ping(round:int):
         try:
           if i != '':
             # glitch.com sites were being funny, so i just used headers
-            if "glitch.me" in i:
+            #if 'glitch.me' in i:
               # maybe implement UserAgent headers to all sites?
-              headers = {
-                'User-Agent': 'Mozilla/5.0 (X11; CrOS x86_64 14324.80.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.102 Safari/537.36',
-              }
-              req = requests.get(i, headers=headers)
-            else:
-              req = requests.get(i)
+            headers = {
+              'User-Agent': 'Mozilla/5.0 (X11; CrOS x86_64 14324.80.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.102 Safari/537.36',
+            }
+              #req = requests.get(i, headers=headers)
+            #else:
+            req = requests.get(i, headers=headers)
             # status codes with colors!
             if req.status_code == 200 or req.status_code == 302 or req.status_code == 304:
               color = colors.green

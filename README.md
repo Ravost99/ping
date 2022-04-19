@@ -15,7 +15,16 @@ Share with friends, Star and Watch for updates coming soon!
 run `python3 setup.py`<br>
 or `python setup.py`<br>
 
+## Features
+- [X] Self ping
+- [X] Configurations file
+- [X] File updates (like `git pull`)
+- [X] Ping headers
+
 ## Coming Soon
-- [X] Self ping (kinda)
 - [ ] Quick fetch
-- [X] Config file, _maybe_
+
+## Help & Info
+- Owner: **[Ravost99](https://github.com/Ravost99)** (Ravost99#3361 on discord)
+- Started coding sometime in january
+- Need help create an issue on github!
