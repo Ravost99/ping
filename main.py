@@ -6,6 +6,11 @@ except:
   os.system('pip install -U pip')
 
 import time, colors, os, time, config
+if os.path.isfile('config.py'):
+  import config
+else:
+  from setup import setup
+  setup()
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
 from auto_update import update
