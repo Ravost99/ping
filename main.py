@@ -5,7 +5,7 @@ except:
   os.system('pip install requests pytz')
   os.system('pip install -U pip')
 
-import time, colors, os, time, config
+import time, colors, os, time
 if os.path.isfile('config.py'):
   import config
 else:
