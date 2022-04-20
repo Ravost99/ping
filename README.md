@@ -8,18 +8,16 @@ Share with friends, Star and Watch for updates coming soon!
 ## Features
 - Ping rounds
 - Custom site list
-- Now working with [glitch](https://glitch.com/)
+- Ping headers
 - Down Log
+- Self ping
+- Configurations file
+- File updates (like `git pull`)
 
 ## Setup
 Just run `python3 main.py` 
 or `python main.py`<br>
 
-## Features
-- [X] Self ping
-- [X] Configurations file
-- [X] File updates (like `git pull`)
-- [X] Ping headers
 
 ## Coming Soon
 - [ ] Quick fetch
