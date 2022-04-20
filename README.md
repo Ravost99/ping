@@ -27,4 +27,4 @@ or `python main.py`<br>
 ## Help & Info
 - Owner: **[Ravost99](https://github.com/Ravost99)** (Ravost99#3361 on discord)
 - Started coding sometime in january
-- Need help create an issue on github!
+- Need help? Create an issue on github!
