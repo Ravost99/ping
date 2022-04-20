@@ -12,8 +12,8 @@ Share with friends, Star and Watch for updates coming soon!
 - Down Log
 
 ## Setup
-run `python3 setup.py`<br>
-or `python setup.py`<br>
+Just run `python3 main.py` 
+or `python main.py`<br>
 
 ## Features
 - [X] Self ping
