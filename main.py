@@ -11,6 +11,7 @@ if os.path.isfile('config.py'):
 else:
   from setup import setup
   setup()
+  os.system('python3 main.py')
 
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
