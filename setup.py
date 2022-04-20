@@ -4,7 +4,7 @@ def setup():
   
   logging = input("Do you want logging? (Y/N)\n")
   rounds = input("Do you want ping rounds (Y/N)\n")
-  updates = input("Check for updates every round? (Y/N)\n")
+  updates = input("Check for updates every round? (Will not ping until you update) (Y/N)\n")
   website = input("Enter the website or ip address the pinger is running on:\n")
   interval = int(input("What do you want the self-ping interval to be? (minimum 5) (in minutes)\n"))
   
