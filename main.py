@@ -147,7 +147,7 @@ def ping(round:int):
               color = colors.dark_red
             elif req.status_code == 307 or req.status_code == 308:
               color = colors.yellow
-            elif req.status_code == 500:
+            elif req.status_code.startswith(5):
               # error logging again
               if config.logging == True:
                 log(req, i, current_time, current_date)
