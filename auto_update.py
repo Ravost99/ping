@@ -23,6 +23,8 @@ def update(send_return=True):
         else:
           return
       else:
+        if item == 'version':
+          
         update = input(f"There is a new update in {item}, would you like to update? (Will override {colors.underline}everything{colors.reset} in {item}) (Y/N) ")
         if update.lower() == 'y':
           with open(item, 'w') as file:

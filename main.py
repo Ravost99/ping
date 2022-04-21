@@ -97,14 +97,6 @@ def readFile(file:str, type:str='r'):
       lines += line + '\n'
   return lines
 
-# ez
-def log(req, url, time, date):
-  with open('log.txt', 'a') as f:
-    if config.ping_rounds == True:
-      f.write(f'Errors in Ping round #{str(round)}\nError on Url {url}: \'{req.status_code}\' - {time} {date}\n')
-    else:
-      f.write(f'Error on Url {url}: \'{req.status_code}\' - {time} {date}\n')
-
 #tldr ping function
 def ping(round:int):
   if config.ping_rounds == True:
@@ -145,14 +137,22 @@ def ping(round:int):
             elif req.status_code == 400 or req.status_code == 401 or req.status_code == 404 or req.status_code == 502:
               # error logging
               if config.logging == True:
-                log(req, i, current_time, current_date)
+                with open('log.txt', 'a') as f:
+                  if config.ping_rounds == True:
+                    f.write(f'Errors in Ping round #{str(round)}\nError on Url {i}: \'{req.status_code}\' - {current_time} {current_date}\n')
+                  else:
+                    f.write(f'Error on Url {i}: \'{req.status_code}\' - {current_time} {current_date}\n')
               color = colors.dark_red
             elif req.status_code == 307 or req.status_code == 308:
               color = colors.yellow
             elif req.status_code.startswith(5):
               # error logging again
               if config.logging == True:
-                log(req, i, current_time, current_date)
+                with open('log.txt', 'a') as f:
+                  if config.ping_rounds == True:
+                    f.write(f'Errors in Ping round #{str(round)}\nError on Url {i}: \'{req.status_code}\' - {current_time} {current_date}\n')
+                  else:
+                    f.write(f'Error on Url {i}: \'{req.status_code}\' - {current_time} {current_date}\n')
               color = colors.purple
             else:
               color = colors.reset
