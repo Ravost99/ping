@@ -24,12 +24,15 @@ def update(send_return=True):
           return
       else:
         if item == 'version':
-          
+          print(f"{colors.bold}{colors.dark_red}Critical Update available!{colors.reset} Version {update_data}->{new_data}")
+          with open(item, 'w') as file:
+            file.write(new_data)
+          print(f"{colors.green}Updated Succesfully!{colors.reset}")
         update = input(f"There is a new update in {item}, would you like to update? (Will override {colors.underline}everything{colors.reset} in {item}) (Y/N) ")
         if update.lower() == 'y':
           with open(item, 'w') as file:
             file.write(new_data)
-          print(f'{colors.green}Updated Successfull!{colors.reset}')
+          print(f'{colors.green}Updated Successfully!{colors.reset}')
         else:
           print(f"{colors.dark_red}Cancled Update in {item}{colors.reset}")
-  print("Restarting...") #30 lines of _TERROR_
+  print("Restarting...") #38 lines of _TERROR_
