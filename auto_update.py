@@ -4,7 +4,7 @@ import urllib, colors, os
 # pretty much like auto `git pull`
 def update(send_return=True):
   # files to be updated
-  stuff_to_update = ['main.py', 'auto_update.py', 'colors.py', 'templates/index.html', 'README.md', 'version']
+  stuff_to_update = ['main.py', 'auto_update.py', 'colors.py', 'templates/index.html', 'README.md', 'version'] #version always last!
   for item in stuff_to_update:
     new_data = ""
     update_data = ""
@@ -32,7 +32,8 @@ def update(send_return=True):
         if update.lower() == 'y':
           with open(item, 'w') as file:
             file.write(new_data)
-          print(f'{colors.green}Updated Successfully!{colors.reset}')
+          print(f'{colors.green}Updated to version {new_data} Successfully!{colors.reset}')
+          break
         else:
           print(f"{colors.dark_red}Cancled Update in {item}{colors.reset}")
-  print("Restarting...") #38 lines of _TERROR_
+  print("Restarting...") #39 lines of _TERROR_
