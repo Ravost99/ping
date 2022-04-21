@@ -6,6 +6,7 @@ Version/Release on github coming soon!<br>
 Share with friends, Star and Watch for updates coming soon!
 
 ## Features
+- Using `#` at the start of line to 'comment' the line out in `sites.txt`
 - Ping rounds
 - Custom site list
 - Ping headers

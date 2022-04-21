@@ -127,6 +127,8 @@ def ping(round:int):
     for i in pings:
       if i not in ping_list:
         try:
+          if i.startswith('#'):
+            i += 1
           if i != '':
             # glitch.com sites were being funny, so i just used headers
             #if 'glitch.me' in i:
