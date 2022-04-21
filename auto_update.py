@@ -33,7 +33,7 @@ def update(send_return=True):
           with open(item, 'w') as file:
             file.write(new_data)
           print(f'{colors.green}Updated to version {new_data} Successfully!{colors.reset}')
-          break
+          continue
         else:
           print(f"{colors.dark_red}Cancled Update in {item}{colors.reset}")
   print("Restarting...") #39 lines of _TERROR_
