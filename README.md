@@ -13,7 +13,7 @@ Share with friends, Star and Watch for updates coming soon!
 - Down Log
 - Self ping
 - Configurations file
-- File updates (like `git pull`)
+- File updates & version updates (like `git pull`)
 
 ## Setup
 Just run `python3 main.py` 
