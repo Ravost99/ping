@@ -1,7 +1,10 @@
 # Simple Pinger
 
-And all you have to do it ping it through [uptimerobot](https://uptimerobot.com), well soon you won't have to!
-<!-- want to remove pinging through uptimerobot -->
+<!--And all you have to do it ping it through [uptimerobot](https://uptimerobot.com), well soon you won't have to!
+want to remove pinging through uptimerobot -->
+Now you dont even need to ping through uptimerobot, becuz of self pinging feature
+
+
 Version/Release on github coming soon!<br>
 Share with friends, Star and Watch for updates coming soon!
 
