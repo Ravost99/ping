@@ -15,7 +15,7 @@ else:
 
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
-from auto_update import update
+from auto_update import update, version_update
 from colors import colorMsg, rainBow, allBGCodes, allColorCodes
 from threading import Thread
 
@@ -99,6 +99,8 @@ def readFile(file:str, type:str='r'):
 
 #tldr ping function
 def ping(round:int):
+  # yup all the way at the top :D
+  version_update()
   if config.ping_rounds == True:
     with open('round', 'w') as f:
       f.write(str(round))
