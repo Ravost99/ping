@@ -19,6 +19,10 @@ from auto_update import update, version_update
 from colors import colorMsg, rainBow, allBGCodes, allColorCodes
 from threading import Thread
 
+if config.debug == True:
+  def print(args):
+    rainBow(args)
+
 def clear():
   os.system('clear')
 

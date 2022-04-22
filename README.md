@@ -18,7 +18,7 @@ Share with friends, Star and Watch for updates coming soon!
 - Configurations file
 - File updates & version updates (like `git pull`)
 
-## Setup
+## Setup & Running
 Just run `python3 main.py` 
 or `python main.py`<br>
 
@@ -30,3 +30,18 @@ or `python main.py`<br>
 - Owner: **[Ravost99](https://github.com/Ravost99)** (Ravost99#3361 on discord)
 - Started coding sometime in january
 - Need help? Create an issue on github!
+
+------
+
+
+<h4>
+<details>
+  <summary>Code Secrets</summary>
+
+  If you add `debug = True` in `config.py`<br>then you can access some kinda broken features!
+  <ul>
+    <li>Disable Automatic version updates (view old versions)</li>
+    <li>Have some fun with colors in console</li>
+    <li>And more coming soon!</li>
+  </ul>
+</details></h4>

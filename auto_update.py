@@ -1,9 +1,12 @@
-import urllib, colors, os, time
+import urllib, colors, os, time, config
 
 # this took about >1 hour of coding 
 # pretty much like auto `git pull`
 def update(send_return=True):
-  version_update()
+  if config.debug == True:
+    return
+  else:
+    version_update()
   # files to be updated
   stuff_to_update = ['main.py', 'auto_update.py', 'colors.py', 'templates/index.html', 'README.md']
   for item in stuff_to_update:
@@ -36,24 +39,27 @@ def update(send_return=True):
 
 # replica of update()
 def version_update():
-  file = 'version'
-  new_data = ""
-  update_data = ""
-  # getting github repo
-  data = urllib.request.urlopen("https://raw.githubusercontent.com/Ravost99/ping/master/" + file)
-  for line in data.readlines():
-    
-    new_data += line.decode("utf-8")
-  with open(file) as f:
-    for line in f.readlines():
-      update_data += line
+  if config.debug == True:
+    colors.rainBow("Hehe disabled =)")
+  else:
+    file = 'version'
+    new_data = ""
+    update_data = ""
+    # getting github repo
+    data = urllib.request.urlopen("https://raw.githubusercontent.com/Ravost99/ping/master/" + file)
+    for line in data.readlines():
       
-    if new_data == update_data:
-      print(f"{colors.green}Ping version up to date! (v{update_data}){colors.reset}")
-    else:
-      print(f"{colors.bold}{colors.dark_red}Critical Update available!{colors.reset} Version {update_data} --> {new_data}")
-      time.sleep(0.5)
-      with open(file, 'w') as file:
-        file.write(new_data)
-      time.sleep(0.5)
-      print(f'{colors.green}Updated to version {new_data} Successfully!{colors.reset}')
+      new_data += line.decode("utf-8")
+    with open(file) as f:
+      for line in f.readlines():
+        update_data += line
+        
+      if new_data == update_data:
+        print(f"{colors.green}Ping version up to date! (v{update_data}){colors.reset}")
+      else:
+        print(f"{colors.bold}{colors.dark_red}Critical Update available!{colors.reset} Version {update_data} --> {new_data}")
+        time.sleep(0.5)
+        with open(file, 'w') as file:
+          file.write(new_data)
+        time.sleep(0.5)
+        print(f'{colors.green}Updated to version {new_data} Successfully!{colors.reset}')

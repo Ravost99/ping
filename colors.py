@@ -70,7 +70,7 @@ def rainBow(msg):
     bg = random.choice(allBGColors)
     style = random.choice(allStyles)
     sys.stdout.write(f"{color}{bg}{style}{msg[i]}")
-  print(reset)
+  #print(reset)
 
 def allBGCodes():
   for i in range(0, 16):
