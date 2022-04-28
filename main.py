@@ -5,7 +5,7 @@ except:
   os.system('pip install requests pytz')
   os.system('pip install -U pip')
 
-import time, colors, os, time
+import time, colors, os, time, math, random
 if os.path.isfile('config.py'):
   import config
 else:
@@ -101,6 +101,25 @@ def readFile(file:str, type:str='r'):
       lines += line + '\n'
   return lines
 
+def get_messages(ping_round=None):
+  sites = []
+  percent = 100
+  with open("sites.txt") as f:
+    pings = f.read().split('\n')
+    length = len(pings)
+    num = 100/length
+    for i in pings:
+      if i != '':
+        headers = {
+          'User-Agent': 'Mozilla/5.0 (X11; CrOS x86_64 14324.80.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.102 Safari/537.36',
+        }
+        req = requests.get(i, headers=headers)
+        sites.append(req.status_code)
+        if req.status_code == 404:
+          percent -= num
+    messages = [f'Almost to ping round #{str(int(math.ceil(ping_round)))}!', f'{str(ping_round*5)} is 5 times your ping round!', 'The github repo is https://github.com/Ravost99/ping', 'Hello', 'Random round messages!', f'{percent}% of your sites are up!']
+    return random.choice(messages)
+  
 #tldr ping function
 def ping(round:int):
   # yup all the way at the top :D
@@ -125,8 +144,6 @@ def ping(round:int):
     for i in pings:
       if i not in ping_list:
         try:
-          if i.startswith('#'):
-            i += 1
           if i != '':
             # glitch.com sites were being funny, so i just used headers
             #if 'glitch.me' in i:
