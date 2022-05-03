@@ -119,7 +119,7 @@ def get_messages(ping_round=None):
           percent -= num
     messages = [f'Almost to ping round #{str(int(math.ceil(ping_round)))}!', f'{str(ping_round*5)} is 5 times your ping round!', 'The github repo is https://github.com/Ravost99/ping', 'Hello', 'Random round messages!', f'{percent}% of your sites are up!']
     return random.choice(messages)
-  
+
 #tldr ping function
 def ping(round:int):
   # yup all the way at the top :D
