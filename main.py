@@ -1,8 +1,9 @@
 try:
   import requests, pytz
+  from discord_webhook import DiscordWebhook, DiscordEmbed
 except:
   import os
-  os.system('pip install requests pytz')
+  os.system('pip install requests pytz discord_webhook')
   os.system('pip install -U pip')
 
 import time, colors, os, time, math, random
@@ -100,6 +101,15 @@ def readFile(file:str, type:str='r'):
     for line in f.readlines():
       lines += line + '\n'
   return lines
+
+# coming soon
+def webhook_error():
+  webhook = DiscordWebhook(url=os.environ['webhook'])
+  embed = DiscordEmbed(
+    title="Your Title",
+    description="Lorem ipsum dolor sit",
+    color=242424
+  )
 
 def get_messages(ping_round=None):
   sites = []
