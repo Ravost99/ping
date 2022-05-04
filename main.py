@@ -103,13 +103,27 @@ def readFile(file:str, type:str='r'):
   return lines
 
 # coming soon
-def webhook_error():
+def webhook_error(url, status, round, time, date):
   webhook = DiscordWebhook(url=os.environ['webhook'])
   embed = DiscordEmbed(
-    title="Your Title",
-    description="Lorem ipsum dolor sit",
-    color=242424
+    title='Site is down!',
+    color='ff0000'
   )
+  embed.add_embed_field(
+    name='Url',
+    value=f'{url} ({status})'
+  )
+  embed.add_embed_field(
+    name='Ping Round',
+    value=round
+  )
+  embed.set_footer(
+    text=f'{time} {date}'
+  )
+  
+  webhook.add_embed(embed)
+  response = webhook.execute()
+  
 
 def get_messages(ping_round=None):
   sites = []
@@ -170,6 +184,9 @@ def ping(round:int):
             elif req.status_code == 400 or req.status_code == 401 or req.status_code == 404 or req.status_code == 502:
               # error logging
               if config.logging == True:
+                # discord webhook logging
+                webhook_error(i, req.status_code, str(round), current_time, current_date)
+                
                 with open('log.txt', 'a') as f:
                   if config.ping_rounds == True:
                     f.write(f'Errors in Ping round #{str(round)}\nError on Url {i}: \'{req.status_code}\' - {current_time} {current_date}\n')
@@ -181,6 +198,9 @@ def ping(round:int):
             elif req.status_code.startswith(5):
               # error logging again
               if config.logging == True:
+                # discord webhook logging
+                webhook_error(i, req.status_code, str(round), current_time, current_date)
+                
                 with open('log.txt', 'a') as f:
                   if config.ping_rounds == True:
                     f.write(f'Errors in Ping round #{str(round)}\nError on Url {i}: \'{req.status_code}\' - {current_time} {current_date}\n')
