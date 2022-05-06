@@ -25,6 +25,7 @@ or `python main.py`<br>
 
 ## Coming Soon
 - [ ] Quick fetch
+- [ ] Working Redirect (https://www.google.com/search?q=check+if+site+is+redirect+python)
 
 ## Help & Info
 - Owner: **[Ravost99](https://github.com/Ravost99)** (Ravost99#3361 on discord)

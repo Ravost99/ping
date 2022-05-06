@@ -194,6 +194,7 @@ def ping(round:int):
                     f.write(f'Error on Url {i}: \'{req.status_code}\' - {current_time} {current_date}\n')
               color = colors.dark_red
             elif req.status_code == 307 or req.status_code == 308:
+              # redirect https://www.google.com/search?q=check+if+site+is+redirect+python
               color = colors.yellow
             elif req.status_code.startswith(5):
               # error logging again
