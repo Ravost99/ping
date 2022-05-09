@@ -2,7 +2,7 @@
 
 <!--And all you have to do it ping it through [uptimerobot](https://uptimerobot.com), well soon you won't have to!
 want to remove pinging through uptimerobot -->
-Now you dont even need to ping through uptimerobot, becuz of self pinging feature
+Now you dont even need to ping through uptimerobot, becuz of [self pinging feature](https://github.com/Ravost99/ping/blob/main/main.py#L246)
 
 
 Version/Release on github coming soon!<br>
