@@ -79,7 +79,7 @@ def fetch(url):
     'User-Agent': 'Mozilla/5.0 (X11; CrOS x86_64 14324.80.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.102 Safari/537.36',
   }
   if url in readFile('sites.txt'):
-    req = requests.get(url, headers=headers)
+    req = requests.get(url, headers=headers, allow_redirects=False)
     return str(req.status_code)
   else:
     return 'url is not in sites.txt'
@@ -137,7 +137,7 @@ def get_messages(ping_round=None):
         headers = {
           'User-Agent': 'Mozilla/5.0 (X11; CrOS x86_64 14324.80.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.102 Safari/537.36',
         }
-        req = requests.get(i, headers=headers)
+        req = requests.get(i, headers=headers, allow_redirects=False)
         sites.append(req.status_code)
         if req.status_code == 404:
           percent -= num
@@ -177,10 +177,13 @@ def ping(round:int):
             }
               #req = requests.get(i, headers=headers)
             #else:
-            req = requests.get(i, headers=headers)
+            req = requests.get(i, headers=headers, allow_redirects=False)
             # status codes with colors!
-            if req.status_code == 200 or req.status_code == 202 or req.status_code == 302 or req.status_code == 304:
+            if req.status_code == 200 or req.status_code == 202:
               color = colors.green
+            elif req.status_code == 302 or req.status_code == 304:
+              color = colors.yellow
+              #requests.get(i, headers=headers, allow_redirect=True)
             elif req.status_code == 400 or req.status_code == 401 or req.status_code == 404 or req.status_code == 502:
               # error logging
               if config.logging == True:
@@ -246,7 +249,7 @@ def start():
 def self_ping():
   while True:
     # getting the website / ip the server is running on
-    requests.get(config.website)
+    requests.get(config.website, allow_redirects=False)
     # waiting for the ping interval in config.py
     time.sleep(config.ping_intvl*60)
 
