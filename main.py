@@ -6,7 +6,7 @@ except:
   os.system('pip install requests pytz discord_webhook')
   os.system('pip install -U pip')
 
-import time, colors, os, time, math, random
+import time, colors, os, time, math, random, re
 if os.path.isfile('config.py'):
   import config
 else:
@@ -72,6 +72,8 @@ def getLogs():
 def up():
   return 'up', 200
 
+# ------------------ Functions ------------------------#
+
 # for quick fetch feature, will try to add rate limiting
 def fetch(url):
   # using UserAgent to ping glitch sites, to prevent 401 unauthorized
@@ -102,11 +104,29 @@ def readFile(file:str, type:str='r'):
       lines += line + '\n'
   return lines
 
-# coming soon
+# get website title for discord webhook logging
+def get_title(url):
+  headers = {
+    'User-Agent': 'Mozilla/5.0 (X11; CrOS x86_64 14324.80.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.102 Safari/537.36',
+  }
+  try:
+    req = requests.get(url, headers=headers)
+    title = re.search('<title>(.*)</title>', req.text).group(1)
+
+    return title
+  except:
+    return None
+  
+# discord webhook logging
 def webhook_error(url, status, round, time, date):
   webhook = DiscordWebhook(url=os.environ['webhook'])
+  title = get_title(url)
+  if title is None:
+    site = 'Site'
+  else:
+    site = title
   embed = DiscordEmbed(
-    title='Site is down!',
+    title=f'{site} is down!',
     color='ff0000'
   )
   embed.add_embed_field(
@@ -123,7 +143,6 @@ def webhook_error(url, status, round, time, date):
   
   webhook.add_embed(embed)
   response = webhook.execute()
-  
 
 def get_messages(ping_round=None):
   sites = []
@@ -181,9 +200,6 @@ def ping(round:int):
             # status codes with colors!
             if req.status_code == 200 or req.status_code == 202:
               color = colors.green
-            elif req.status_code == 302 or req.status_code == 304:
-              color = colors.yellow
-              #requests.get(i, headers=headers, allow_redirect=True)
             elif req.status_code == 400 or req.status_code == 401 or req.status_code == 404 or req.status_code == 502:
               # error logging
               if config.logging == True:
@@ -196,9 +212,11 @@ def ping(round:int):
                   else:
                     f.write(f'Error on Url {i}: \'{req.status_code}\' - {current_time} {current_date}\n')
               color = colors.dark_red
-            elif req.status_code == 307 or req.status_code == 308:
+            elif req.status_code == 301  or req.status_code == 302 or req.status_code == 303 or req.status_code == 307 or req.status_code == 308:
               # redirect https://www.google.com/search?q=check+if+site+is+redirect+python
+              requests.get(req.url, headers=headers)
               color = colors.yellow
+            # all 500-599 are errors
             elif req.status_code.startswith(5):
               # error logging again
               if config.logging == True:
