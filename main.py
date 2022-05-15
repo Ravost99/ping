@@ -6,7 +6,8 @@ except:
   os.system('pip install requests pytz discord_webhook')
   os.system('pip install -U pip')
 
-import time, colors, os, time, math, random, re
+import time, colors, os, time, math, random, re, logging
+  
 if os.path.isfile('config.py'):
   import config
 else:
@@ -14,11 +15,16 @@ else:
   setup()
   os.system('python3 main.py')
 
+#disable logging in the console
+if config.console_logging is not True:
+  log = logging.getLogger('werkzeug')
+  log.setLevel(logging.ERROR)
+
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
 from auto_update import update, version_update
 from colors import colorMsg, rainBow, allBGCodes, allColorCodes
-from threading import Thread
+from threading import Thread, Timer
 
 if config.debug == True:
   def print(args):

@@ -1,4 +1,5 @@
 import urllib, colors, os, time, config
+from threading import Timer
 
 # this took about >1 hour of coding 
 # pretty much like auto `git pull`
@@ -27,7 +28,10 @@ def update(send_return=True):
         else:
           return
       else:
-        update = input(f"There is a new update in {item}, would you like to update? (Will override {colors.underline}everything{colors.reset} in {item}) (Y/N) ")
+        timeout = 3
+        #t = Timer(timeout, print, [f'{colors.dark_red}Cancled Update in {item}{colors.reset}'])
+        #t.start()
+        update = input(f"There is a new update in {item}, would you like to update? You have {str(timeout)} seconds. (Will override {colors.underline}everything{colors.reset} in {item}) (Y/N) ")
         if update.lower() == 'y':
           with open(item, 'w') as file:
             file.write(new_data)
@@ -36,6 +40,7 @@ def update(send_return=True):
         else:
           print(f"{colors.dark_red}Cancled Update in {item}{colors.reset}")
   print("Restarting...") #39 lines of _TERROR_
+        
 
 # replica of update()
 def version_update():
