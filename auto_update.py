@@ -9,7 +9,7 @@ def update(send_return=True):
   else:
     version_update()
   # files to be updated
-  stuff_to_update = ['main.py', 'auto_update.py', 'colors.py', 'templates/index.html', 'README.md']
+  stuff_to_update = ['main.py', 'auto_update.py', 'colors.py', 'templates/index.html', 'README.md', '.replit']
   for item in stuff_to_update:
     new_data = ""
     update_data = ""
