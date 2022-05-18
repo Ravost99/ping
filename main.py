@@ -204,8 +204,10 @@ def ping(round:int):
             #else:
             req = requests.get(i, headers=headers, allow_redirects=False)
             # status codes with colors!
-            if req.status_code == 200 or req.status_code == 202:
+            if req.status_code == 200:
               color = colors.green
+            elif req.status_code == 202:
+              color = colors.orange
             elif req.status_code == 400 or req.status_code == 401 or req.status_code == 404 or req.status_code == 502:
               # error logging
               if config.logging == True:
