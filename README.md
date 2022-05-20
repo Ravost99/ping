@@ -26,11 +26,16 @@ or `python main.py`<br>
 ## Coming Soon
 - [ ] Quick fetch
 - [ ] Working Redirect
+- [ ] Don't Update file after number of seconds
 
 ## Help & Info
 - Owner: **[Ravost99](https://github.com/Ravost99)** (Ravost99#3361 on discord)
 - Started coding sometime in january
 - Need help? Create an issue on github!
+
+<video width="100%" controls>
+  <source src="https://ravost.repl.co/files/how-to-create-a-bot.mp4" type="video/mp4">
+</video>
 
 ------
 
