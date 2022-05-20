@@ -1,6 +1,10 @@
 # Simple Pinger
 
-<!--And all you have to do it ping it through [uptimerobot](https://uptimerobot.com), well soon you won't have to!
+<!--And all you have to do it ping
+
+https://user-images.githubusercontent.com/75264908/169619223-d0f5fb11-9be0-46ff-88ab-7762f18413ea.mp4
+
+ it through [uptimerobot](https://uptimerobot.com), well soon you won't have to!
 want to remove pinging through uptimerobot -->
 Now you dont even need to ping through uptimerobot, becuz of [self pinging feature](https://github.com/Ravost99/ping/blob/main/main.py#L246)
 
