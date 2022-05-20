@@ -37,9 +37,7 @@ or `python main.py`<br>
 - Started coding sometime in january
 - Need help? Create an issue on github!
 
-<video width="100%" controls>
-  <source src="https://ravost.repl.co/files/how-to-create-a-bot.mp4" type="video/mp4">
-</video>
+https://user-images.githubusercontent.com/75264908/169619223-d0f5fb11-9be0-46ff-88ab-7762f18413ea.mp4
 
 ------
 
