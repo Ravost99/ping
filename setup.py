@@ -44,5 +44,5 @@ def setup():
   print("Restarting with main.py")
   time.sleep(2)
   with open('config.py', 'a') as f:
-    f.write(f'setup = True\nlogging = {logging}\nconsole_logging = {console_logging}\nping_rounds = {rounds}\nroundly_updates = {updates}\nping_intvl = {interval}\nwebsite = \'{website}\'\n')
+    f.write(f'setup = True\nlogging = {logging}\nconsole_logging = {console_logging}\nping_rounds = {rounds}\nroundly_updates = {updates}\nping_intvl = {interval}\nwebsite = \'{website}\'\ndebug = False\n')
   os.remove('setup.py')

@@ -1,4 +1,3 @@
 language = "python3"
-onBoot = "python3 main.py"
-run = "python3 main.py"
+run = ["python3", "main.py"]
 hidden = ["requirements.txt", "venv", ".config", ".github", "**/__pycache__", "**/.mypy_cache", "**/*.pyc", ".gitignore"]
