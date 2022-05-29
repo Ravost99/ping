@@ -5,6 +5,8 @@ except:
   import os
   os.system('pip install requests pytz discord_webhook')
   os.system('pip install -U pip')
+  import requests, pytz
+  from discord_webhook import DiscordWebhook, DiscordEmbed
 
 import time, colors, os, time, math, random, re, logging
   
