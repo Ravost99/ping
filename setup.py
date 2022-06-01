@@ -45,6 +45,7 @@ def setup():
   time.sleep(2)
   with open('config.py', 'a') as f:
     f.write(f'setup = True\nlogging = {logging}\nconsole_logging = {console_logging}\nping_rounds = {rounds}\nroundly_updates = {updates}\nping_intvl = {interval}\nwebsite = \'{website}\'\ndebug = False\n')
-  removed_files = ['setup.py', '.github', '.gitignore']
+  removed_files = ['setup.py', '.gitignore']
   for item in removed_files:
     os.remove(item)
+  os.removedirs('.github')
