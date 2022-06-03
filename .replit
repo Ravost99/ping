@@ -1,3 +1,0 @@
-language = "python3"
-run = ["python3", "main.py"]
-hidden = ["requirements.txt", "venv", ".config", ".github", "**/__pycache__", "**/.mypy_cache", "**/*.pyc", ".gitignore"]
