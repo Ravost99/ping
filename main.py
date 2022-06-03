@@ -49,7 +49,6 @@ def home():
     return render_template('index.html', url=url)
   else:
     return render_template('index.html')
-  #return "<h1>Hello world!<br>Ping!</h1><br><p>Add site <a href='https://ping.ravost.repl.co/add/'>Here</a>"
 
 # coming soon, will add a quick ping to see status
 # beta code ↓
@@ -104,7 +103,7 @@ def new(url):
       return 'Site already added'
     else:
       with open('sites.txt', 'a') as f:
-        f.write("\n"+url)
+        f.write('\n'+url)
       return 'Added url: '+url
 
 # simple file reader like in line 77, for /logs
@@ -118,7 +117,7 @@ def readFile(file:str, type:str='r'):
 # ping url for threads
 def get_ping_url(url):
   now = datetime.now(pytz.timezone('America/Chicago'))
-  current_time = now.strftime("%I:%M:%S %p")
+  current_time = now.strftime('%I:%M:%S %p')
   current_date = datetime.today().strftime('%m-%d-%Y')
   headers = {
     'User-Agent': 'Mozilla/5.0 (X11; CrOS x86_64 14324.80.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.102 Safari/537.36',
@@ -157,7 +156,7 @@ def get_ping_url(url):
     color = colors.purple
   else:
     color = colors.reset
-  print(f"Pinging site: {url} ({color}{req.status_code}{colors.reset})")
+  print(f'Pinging site: {url} ({color}{req.status_code}{colors.reset})')
   
   return req
 
@@ -172,6 +171,8 @@ def ping(round:int):
   if config.roundly_updates == True:
     update(False)
   clear()
+  
+  print(f'Ping Round #{round}')
   
   site_list = []
   
@@ -206,7 +207,7 @@ def start():
       round = int(f.read())
   else:
     round = 0
-  colorMsg("Starting... ", colors.green)
+  colorMsg('Starting... ', colors.green)
   time.sleep(0.5)
   clear()
   while True:
