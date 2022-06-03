@@ -1,13 +1,5 @@
 # Simple Pinger
-
-<!--And all you have to do it ping
-
-https://user-images.githubusercontent.com/75264908/169619223-d0f5fb11-9be0-46ff-88ab-7762f18413ea.mp4
-
- it through [uptimerobot](https://uptimerobot.com), well soon you won't have to!
-want to remove pinging through uptimerobot -->
-Now you dont even need to ping through uptimerobot, becuz of [self pinging feature](https://github.com/Ravost99/ping/blob/main/main.py#L246)
-
+### Now working with threads! (Read more below)
 
 Version/Release on github coming soon!<br>
 Share with friends, Star and Watch for updates coming soon!
@@ -22,14 +14,22 @@ Share with friends, Star and Watch for updates coming soon!
 - Configurations file
 - File updates & version updates (like `git pull`)
 
+## Threading Stuff
+**Features:**
+- Faster pinging times
+- Less down time
+- Some what organizing up and down sites (up at top, down at bottom)
+- More fun!
+View all threading functions in `main.py line
+
 ## Setup & Running
 Just run `python3 main.py` 
 or `python main.py`<br>
+If on replit do the same, the `.replit` button is configured
 
 
 ## Coming Soon
 - [ ] Quick fetch
-- [ ] Working Redirect
 - [ ] Don't Update file after number of seconds
 
 ## Help & Info

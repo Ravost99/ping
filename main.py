@@ -65,7 +65,10 @@ def get(url):
 # getting current round with ws instead of console
 @app.route('/round')
 def getRound():
-  return readFile('round')
+  if config.ping_rounds == True:
+    return readFile('round')
+  else:
+    return 'Ping rounds are off!'
 
 # getting logs
 @app.route('/logs')
@@ -73,7 +76,7 @@ def getLogs():
   if config.logging == True:
     return readFile('log.txt')
   else:
-    return 'logging is off!'
+    return 'Logging is off!'
 
 # checking if site is up, for my iphone shortcut
 @app.route('/up')
@@ -112,141 +115,77 @@ def readFile(file:str, type:str='r'):
       lines += line + '\n'
   return lines
 
-# get website title for discord webhook logging
-def get_title(url):
-  headers = {
-    'User-Agent': 'Mozilla/5.0 (X11; CrOS x86_64 14324.80.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.102 Safari/537.36',
-  }
-  try:
-    req = requests.get(url, headers=headers)
-    title = re.search('<title>(.*)</title>', req.text).group(1)
-
-    return title
-  except:
-    return None
-  
-# discord webhook logging
-def webhook_error(url, status, round, time, date):
-  webhook = DiscordWebhook(url=os.environ['webhook'])
-  title = get_title(url)
-  if title is None:
-    site = 'Site'
-  else:
-    site = title
-  embed = DiscordEmbed(
-    title=f'{site} is down!',
-    color='ff0000'
-  )
-  embed.add_embed_field(
-    name='Url',
-    value=f'{url} ({status})'
-  )
-  embed.add_embed_field(
-    name='Ping Round',
-    value=round
-  )
-  embed.set_footer(
-    text=f'{time} {date}'
-  )
-  
-  webhook.add_embed(embed)
-  response = webhook.execute()
-
-def get_messages(ping_round=None):
-  sites = []
-  percent = 100
-  with open("sites.txt") as f:
-    pings = f.read().split('\n')
-    length = len(pings)
-    num = 100/length
-    for i in pings:
-      if i != '':
-        headers = {
-          'User-Agent': 'Mozilla/5.0 (X11; CrOS x86_64 14324.80.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.102 Safari/537.36',
-        }
-        req = requests.get(i, headers=headers, allow_redirects=False)
-        sites.append(req.status_code)
-        if req.status_code == 404:
-          percent -= num
-    messages = [f'Almost to ping round #{str(int(math.ceil(ping_round)))}!', f'{str(ping_round*5)} is 5 times your ping round!', 'The github repo is https://github.com/Ravost99/ping', 'Hello', 'Random round messages!', f'{percent}% of your sites are up!']
-    return random.choice(messages)
-
-#tldr ping function
-def ping(round:int):
-  # yup all the way at the top :D
-  version_update()
-  if config.ping_rounds == True:
-    with open('round', 'w') as f:
-      f.write(str(round))
-  if config.roundly_updates == True:
-    update(False)
-  clear()
-  # time and date for log
+# ping url for threads
+def get_ping_url(url):
   now = datetime.now(pytz.timezone('America/Chicago'))
   current_time = now.strftime("%I:%M:%S %p")
   current_date = datetime.today().strftime('%m-%d-%Y')
-  # ping list
-  ping_list = []
-  # getting all sites in 'sites.txt'
-  with open("sites.txt") as f:
-    pings = f.read().split('\n')
-    if config.ping_rounds == True:
-      print(f"Ping round #{str(round)}")
-    for i in pings:
-      if i not in ping_list:
+  headers = {
+    'User-Agent': 'Mozilla/5.0 (X11; CrOS x86_64 14324.80.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.102 Safari/537.36',
+  }
+  req = requests.get(url, headers=headers, allow_redirects=False)
+  # status codes with colors!
+  if req.status_code == 200:
+    color = colors.green
+  elif req.status_code == 202:
+    color = colors.orange
+  elif req.status_code == 400 or req.status_code == 401 or req.status_code == 404 or req.status_code == 502:
+    # error logging
+    if config.logging == True:                
+      with open('log.txt', 'a') as f:
+        if config.ping_rounds == True:
+          f.write(f'Errors in Ping round #{str(round)}\nError on Url {url}: \'{req.status_code}\' - {current_time} {current_date}\n')
+        else:
+          f.write(f'Error on Url {url}: \'{req.status_code}\' - {current_time} {current_date}\n')
+    color = colors.dark_red
+  # redirects
+  elif req.status_code == 301  or req.status_code == 302 or req.status_code == 303 or req.status_code == 307 or req.status_code == 308:
+    requests.get(req.url, headers=headers)
+    color = colors.yellow
+  # all 500-599 are all errors
+  elif req.status_code.startswith(5):
+    # error logging again
+    if config.logging == True:               
+      with open('log.txt', 'a') as f:
+        if config.ping_rounds == True:
+          f.write(f'Errors in Ping round #{str(round)}\nError on Url {url}: \'{req.status_code}\' - {current_time} {current_date}\n')
+        else:
+          f.write(f'Error on Url {url}: \'{req.status_code}\' - {current_time} {current_date}\n')
+    color = colors.purple
+  else:
+    color = colors.reset
+  print(f"Pinging site: {url} ({color}{req.status_code}{colors.reset})")
+  
+  return req
+
+# ping function with threads
+def ping(round:int):
+  version_update()
+  #ping rounds
+  if config.ping_rounds == True:
+    with open('round', 'w') as f:
+      f.write(str(round))
+
+  if config.roundly_updates == True:
+    update(False)
+  clear()
+  
+  site_list = []
+  
+  with open('sites.txt') as file:
+    sites = file.read().split('\n')
+
+    for i in sites:
+      if i not in site_list:
         try:
           if i != '':
-            # glitch.com sites were being funny, so i just used headers
-            #if 'glitch.me' in i:
-              # maybe implement UserAgent headers to all sites?
-            headers = {
-              'User-Agent': 'Mozilla/5.0 (X11; CrOS x86_64 14324.80.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.102 Safari/537.36',
-            }
-              #req = requests.get(i, headers=headers)
-            #else:
-            req = requests.get(i, headers=headers, allow_redirects=False)
-            # status codes with colors!
-            if req.status_code == 200:
-              color = colors.green
-            elif req.status_code == 202:
-              color = colors.orange
-            elif req.status_code == 400 or req.status_code == 401 or req.status_code == 404 or req.status_code == 502:
-              # error logging
-              if config.logging == True:
-                # discord webhook logging
-                webhook_error(i, req.status_code, str(round), current_time, current_date)
-                
-                with open('log.txt', 'a') as f:
-                  if config.ping_rounds == True:
-                    f.write(f'Errors in Ping round #{str(round)}\nError on Url {i}: \'{req.status_code}\' - {current_time} {current_date}\n')
-                  else:
-                    f.write(f'Error on Url {i}: \'{req.status_code}\' - {current_time} {current_date}\n')
-              color = colors.dark_red
-            elif req.status_code == 301  or req.status_code == 302 or req.status_code == 303 or req.status_code == 307 or req.status_code == 308:
-              # redirect https://www.google.com/search?q=check+if+site+is+redirect+python
-              requests.get(req.url, headers=headers)
-              color = colors.yellow
-            # all 500-599 are errors
-            elif req.status_code.startswith(5):
-              # error logging again
-              if config.logging == True:
-                # discord webhook logging
-                webhook_error(i, req.status_code, str(round), current_time, current_date)
-                
-                with open('log.txt', 'a') as f:
-                  if config.ping_rounds == True:
-                    f.write(f'Errors in Ping round #{str(round)}\nError on Url {i}: \'{req.status_code}\' - {current_time} {current_date}\n')
-                  else:
-                    f.write(f'Error on Url {i}: \'{req.status_code}\' - {current_time} {current_date}\n')
-              color = colors.purple
-            else:
-              color = colors.reset
-            print(f"Pinging site: {i} ({color}{req.status_code}{colors.reset})")
+            site = Thread(target=get_ping_url, args=[i])
+            site.start()
+
         except:
           continue
-        ping_list.append(i)
-    # next round!
-    round += 1
+        site_list.append(i) 
+  round += 1
 
 #running ws for thread
 def run():

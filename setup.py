@@ -49,5 +49,3 @@ def setup():
   for item in removed_files:
     os.remove(item)
   os.removedirs('.github')
-  with open('.replit', 'a') as f:
-    f.write('\nhidden = ["requirements.txt", "venv", ".config", ".github", "**/__pycache__", "**/.mypy_cache", "**/*.pyc", ".gitignore"]')
