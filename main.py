@@ -124,6 +124,9 @@ def get_ping_url(url):
     'User-Agent': 'Mozilla/5.0 (X11; CrOS x86_64 14324.80.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.102 Safari/537.36',
   }
   req = requests.get(url, headers=headers, allow_redirects=False)
+  with open('round') as f:
+    round = f.read()
+  
   # status codes with colors!
   if req.status_code == 200:
     color = colors.green
