@@ -143,7 +143,7 @@ def get_ping_url(url):
     requests.get(req.url, headers=headers)
     color = colors.yellow
   # all 500-599 are all errors
-  elif req.status_code.startswith(5):
+  elif str(req.status_code).startswith('5'):
     # error logging again
     if config.logging == True:               
       with open('log.txt', 'a') as f:
