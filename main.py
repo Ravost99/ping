@@ -167,12 +167,13 @@ def ping(round:int):
   if config.ping_rounds == True:
     with open('round', 'w') as f:
       f.write(str(round))
+    print(f'Ping Round #{round}')
 
   if config.roundly_updates == True:
     update(False)
   clear()
   
-  print(f'Ping Round #{round}')
+  
   
   site_list = []
   
