@@ -115,7 +115,7 @@ def readFile(file:str, type:str='r'):
   return lines
 
 # ping url for threads
-def get_ping_url(url):
+def get_ping_url(url, _print=True):
   now = datetime.now(pytz.timezone('America/Chicago'))
   current_time = now.strftime('%I:%M:%S %p')
   current_date = datetime.today().strftime('%m-%d-%Y')
@@ -156,23 +156,50 @@ def get_ping_url(url):
     color = colors.purple
   else:
     color = colors.reset
-  print(f'Pinging site: {url} ({color}{req.status_code}{colors.reset})')
+    
+  if _print == True:
+    print(f'Pinging site: {url} ({color}{req.status_code}{colors.reset})')
   
   return req
 
+def get_percentage():
+  site_list = []
+  global percentage
+  
+  with open('sites.txt') as f:
+    sites = f.read().split('\n')
+    length = len(sites)
+
+    for i in sites:
+      if i not in site_list:
+        try:
+          if i != '':
+            site = Thread(target=get_ping_url, args=[i, False])
+            site.start()
+            print(site.target)
+        except:
+          continue
+        site_list.append(i)
+  
+  if str(site.status_code).startswith('5') or str(site.status_code).startswith('4'):
+    percentage -= (length - 1)
+  
+  #print(f'{str(percentage)}% up')
+  return percentage
+  
 # ping function with threads
 def ping(round:int):
   version_update()
+  clear()
+  percentage = 100 #get_percentage()
   #ping rounds
   if config.ping_rounds == True:
     with open('round', 'w') as f:
       f.write(str(round))
-    print(f'Ping Round #{round}')
+    print(f'Ping Round #{round} - {str(percentage)}% up')
 
   if config.roundly_updates == True:
     update(False)
-  clear()
-  
   
   
   site_list = []
