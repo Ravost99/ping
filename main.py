@@ -36,6 +36,7 @@ def clear():
   os.system('clear')
 
 app = Flask(__name__)
+last_commit = requests.get('https://api.github.com/repos/Ravost99/ping').json()['pushed_at'][:0-10]
 
 # main page for ws 'POST' for adding urls
 @app.route('/', methods=['POST', 'GET'])
@@ -161,42 +162,17 @@ def get_ping_url(url, _print=True):
     print(f'Pinging site: {url} ({color}{req.status_code}{colors.reset})')
   
   return req
-
-def get_percentage():
-  site_list = []
-  global percentage
-  
-  with open('sites.txt') as f:
-    sites = f.read().split('\n')
-    length = len(sites)
-
-    for i in sites:
-      if i not in site_list:
-        try:
-          if i != '':
-            site = Thread(target=get_ping_url, args=[i, False])
-            site.start()
-            print(site.target)
-        except:
-          continue
-        site_list.append(i)
-  
-  if str(site.status_code).startswith('5') or str(site.status_code).startswith('4'):
-    percentage -= (length - 1)
-  
-  #print(f'{str(percentage)}% up')
-  return percentage
   
 # ping function with threads
 def ping(round:int):
   version_update()
   clear()
-  percentage = 100 #get_percentage()
+  messages = ['Quick fetch coming soon!', '', '', 'Input Timeout coming soon!', f'Latest commit at: {last_commit}', f'1 = {str(round - 1)}']
   #ping rounds
   if config.ping_rounds == True:
     with open('round', 'w') as f:
       f.write(str(round))
-    print(f'Ping Round #{round} - {str(percentage)}% up')
+    print(f'Ping Round #{round} - {random.choice(messages)} \n')
 
   if config.roundly_updates == True:
     update(False)

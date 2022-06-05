@@ -1,5 +1,22 @@
-import urllib, colors, os, time, config
-from threading import Timer
+import urllib, colors, os, time, config, queue
+from threading import Thread
+
+def get_input(message, channel):
+    response = input(message)
+    channel.put(response)
+
+def timeout_input(message, timeout=5):
+    channel = queue.Queue()
+    thread = Thread(target=get_input, args=(message, channel))
+    thread.daemon = True
+    thread.start()
+
+    try:
+        response = channel.get(True, timeout)
+        return response
+    except queue.Empty:
+        pass
+    return None
 
 # this took about >1 hour of coding 
 # pretty much like auto `git pull`
@@ -28,11 +45,9 @@ def update(send_return=True):
         else:
           return
       else:
-        timeout = 3
-        #t = Timer(timeout, print, [f'{colors.dark_red}Cancled Update in {item}{colors.reset}'])
-        #t.start()
-        update = input(f"There is a new update in {item}, would you like to update? You have {str(timeout)} seconds. (Will override {colors.underline}everything{colors.reset} in {item}) (Y/N) ")
-        if update.lower() == 'y':
+        timeout = 5
+        update = timeout_input(f"There is a new update in {item}, would you like to update? You have {str(timeout)} seconds. (Will override {colors.underline}everything{colors.reset} in {item}) (Y/N) ")
+        if update is not None and update.lower() is 'y':
           with open(item, 'w') as file:
             file.write(new_data)
           print(f'{colors.green}Updated Successfully!{colors.reset}')
