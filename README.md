@@ -8,6 +8,7 @@ Share with friends, Star and Watch for updates coming soon!
 - Using `#` at the start of line to 'comment' the line out in `sites.txt`
 - Ping rounds
 - Custom site list
+- Input timeout in `auto_update.py`
 - Ping headers
 - Down Log
 - Self ping
@@ -30,7 +31,7 @@ If on replit do the same, the `.replit` button is configured
 
 ## Coming Soon
 - [ ] Quick fetch
-- [ ] Don't Update file after number of seconds
+- [ ] {percentage}% is up! (need help with getting return values in threads, dm me)
 
 ## Help & Info
 - Owner: **[Ravost99](https://github.com/Ravost99)** (Ravost99#3361 on discord)
