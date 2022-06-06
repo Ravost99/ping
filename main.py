@@ -197,7 +197,7 @@ def ping(round:int):
 
 #running ws for thread
 def run():
-  app.run(host='0.0.0.0',port=8080)
+  app.run(host=config.website,port=8080)
 
 # start pinging
 def start():
