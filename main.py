@@ -167,7 +167,7 @@ def get_ping_url(url, _print=True):
 def ping(round:int):
   version_update()
   clear()
-  messages = ['Quick fetch coming soon!', '', '', 'Input Timeout coming soon!', f'Latest commit at: {last_commit}', f'1 = {str(round - 1)}']
+  messages = ['Quick fetch coming soon!', '', '', 'Currently Debugging!', f'Latest commit at: {last_commit}', f'1 = {str(round - 1)}']
   #ping rounds
   if config.ping_rounds == True:
     with open('round', 'w') as f:
