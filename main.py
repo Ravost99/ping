@@ -197,7 +197,7 @@ def ping(round:int):
 
 #running ws for thread
 def run():
-  app.run(host=config.website,port=8080)
+  app.run(host='0.0.0.0',port=8080)
 
 # start pinging
 def start():
@@ -224,7 +224,7 @@ def start():
 def self_ping():
   while True:
     # getting the website / ip the server is running on
-    requests.get('0.0.0.0', allow_redirects=False)
+    requests.get(config.website, allow_redirects=False)
     # waiting for the ping interval in config.py
     time.sleep(config.ping_intvl*60)
 
