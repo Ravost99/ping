@@ -224,7 +224,7 @@ def start():
 def self_ping():
   while True:
     # getting the website / ip the server is running on
-    requests.get(config.website, allow_redirects=False)
+    requests.get('0.0.0.0', allow_redirects=False)
     # waiting for the ping interval in config.py
     time.sleep(config.ping_intvl*60)
 

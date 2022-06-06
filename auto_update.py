@@ -47,7 +47,7 @@ def update(send_return=True):
       else:
         timeout = 5
         update = timeout_input(f"There is a new update in {item}, would you like to update? You have {str(timeout)} seconds. (Will override {colors.underline}everything{colors.reset} in {item}) (Y/N) ")
-        if update is not None and update.lower() is 'y':
+        if update is not None and update.lower() == 'y':
           with open(item, 'w') as file:
             file.write(new_data)
           print(f'{colors.green}Updated Successfully!{colors.reset}')
