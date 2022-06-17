@@ -222,9 +222,12 @@ def start():
     round += 1
 
 def self_ping():
+  headers = {
+    'User-Agent': 'Mozilla/5.0 (X11; CrOS x86_64 14324.80.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.102 Safari/537.36',
+  }
   while True:
-    # getting the website / ip the server is running on
-    requests.get(config.website, allow_redirects=False)
+    # getting the website / ip the server is running on (with headers)
+    requests.get(config.website, headers=headers, allow_redirects=False)
     # waiting for the ping interval in config.py
     time.sleep(config.ping_intvl*60)
 
