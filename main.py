@@ -9,7 +9,7 @@ except:
   from discord_webhook import DiscordWebhook, DiscordEmbed
 
 import time, colors, os, time, math, random, re, logging
-  
+
 if os.path.isfile('config.py'):
   import config
 else:
