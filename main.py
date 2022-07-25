@@ -3,8 +3,8 @@ try:
   from discord_webhook import DiscordWebhook, DiscordEmbed
 except:
   import os
-  os.system('pip install requests pytz discord_webhook')
-  os.system('pip install -U pip')
+  os.system('python3 -m pip install requests pytz discord_webhook')
+  os.system('python3 -m pip install -U pip')
   import requests, pytz
   from discord_webhook import DiscordWebhook, DiscordEmbed
 
