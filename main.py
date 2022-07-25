@@ -115,6 +115,10 @@ def readFile(file:str, type:str='r'):
 
 # ping url for threads
 def get_ping_url(url, _print=True):
+  # "commenting out" urls
+  if url.startswith('#'):
+    return
+  
   now = datetime.now(pytz.timezone('America/Chicago'))
   current_time = now.strftime('%I:%M:%S %p')
   current_date = datetime.today().strftime('%m-%d-%Y')
@@ -187,7 +191,7 @@ def ping(round:int):
           if i != '':
             site = Thread(target=get_ping_url, args=[i])
             site.start()
-
+            
         except:
           continue
         site_list.append(i) 
